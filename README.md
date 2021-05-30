@@ -12,11 +12,9 @@ OR,
 ./build.sh --help
 ```
 to see all available options.
-
-Panagiotis Velissariou - 05/29/2021  
-
   
-    
+  
+Panagiotis Velissariou - 05/29/2021  
 
 # ADC-WW3-NWM-NEMS
 
