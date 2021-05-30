@@ -12,12 +12,9 @@ OR,
 ./build.sh --help
 ```
 to see all available options.
-  
-    
-      
-      
-Panagiotis Velissariou - 05/29/2021  
 
+Panagiotis Velissariou - 05/29/2021  
+\s\s
 # ADC-WW3-NWM-NEMS
 
 ESMF application for building a NUOPC / NEMS application coupling ADCIRC, ATMESH, WW3 / WW3DATA, and NWM.
