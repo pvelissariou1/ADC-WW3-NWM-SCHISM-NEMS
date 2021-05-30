@@ -1,4 +1,4 @@
-# The contents of this file will change. This file contains some instructions of how to build the NEMS application. For SCHISM only please try:
+# The contents of this file will change. This file contains some generic instructions of how to build the NEMS application. For SCHISM only please try:
 
 ```bash
 ./build.sh --component "SCHISM" --compiler intel --clean -2
@@ -14,6 +14,8 @@ OR,
 to see all available options.
 
 Panagiotis Velissariou - 05/29/2021
+
+
 
 # ADC-WW3-NWM-NEMS
 
