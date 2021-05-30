@@ -1,0 +1,28 @@
+#!/bin/bash
+#SBATCH --job-name=RUN33b
+#SBATCH --partition=compute2
+#SBATCH --nodes=30
+#SBATCH --ntasks-per-node=36
+###Max 8 hrs
+#SBATCH --time=01:00:00
+#SBATCH --mail-type=NONE
+#SBATCH --account=gg0028
+#SBATCH --output=my_job.o%j
+#SBATCH --error=my_job.e%j
+
+# limit stacksize ... adjust to your programs need. Mistral does not suggest unlimited
+#ulimit -s 102400
+ulimit -s 132400
+
+# Environment settings to run a MPI parallel program 
+# compiled with Intel MPI
+module rm intel intelmpi/2018.5.288
+module load intel/16.0 openmpi/1.10.2_mlx-intel16
+module list
+
+export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+
+# Use srun (not mpirun or mpiexec) command to launch
+# programs compiled with any MPI library
+srun -l --propagate=STACK --cpu_bind=cores \
+  --distribution=block:cyclic ./pschism_MISTRAL_TVD-VL

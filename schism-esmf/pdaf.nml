@@ -1,0 +1,21 @@
+# Namelist file for PDAF configuration
+&pdaf_nml
+ screen = 3,      ! 0 is default, use 3 to debug 
+ filtertype = 7,  ! only accept 4(ETKF),5(LETKF),6(ESTKF),7(LESTKF)
+ subtype = 0,     ! subtype of filter, check details in http://pdaf.awi.de/trac/wiki/AvailableOptionsforInitPDAF
+ delt_obs = 36,   ! how many steps to do DA
+ rms_obs = 0.5,   ! observation error, will be vector later
+ forget = 1.0,    ! forgetting factor
+ locweight = 4,   ! localization weight type, 0:uniform, 1:Exponential, 2/3/4:5th-order polynomial, check details in init_pdaf
+ local_range = 500.0,  ! localization range, use lat/lon if ics=2
+ varscale = 1.00, ! Init Ensemble Variance
+ ihfskip_PDAF  = 108,  ! ihfskip for DA output, has to be multiple of delt_obs
+ nspool_PDAF  =  36,  ! nspool for DA output, has to be multiple of delt_obs
+ outf = 1,  ! output handle, 0: no output, 1: ens-mean, 2: members (in schism_001...), 3: both ens-mean & members (has netcdf issues, don't use currently)
+ nhot_PDAF = 0,   ! switch to output analysis hotstart rank files
+ nhot_write_PDAF = 36, ! nhot_write for DA hotstart output, must be a multiple of ihfskip_PDAF if nhot_PDAF=1
+ rms_type  = 1,  ! obs error handle, 1: uniform error from rms_obs; 2: specify error from rms_obs2; 3: specify error from obs files with extra column
+ rms_obs2  = 0.02, 0.1, 0.1, 0.2, 0.2, ! specified error with different type obs, z/t/s/u/v
+ ens_init  = 1,  ! ens state init option, 1: use eofs & hotstart.nc, 2: same as 1 but use meanstate, 3: restart from ens.bin
+/
+

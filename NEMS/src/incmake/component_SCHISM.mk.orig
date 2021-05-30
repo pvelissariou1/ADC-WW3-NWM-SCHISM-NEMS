@@ -1,0 +1,57 @@
+########################################################################
+
+# Location of the ESMF makefile fragment for this component:
+schism_mk = $(SCHISM_BINDIR)/schism.mk
+all_component_mk_files+=$(schism_mk)
+
+# Location of source code and installation
+SCHISM_SRCDIR?=$(ROOTDIR)/SCHISM
+SCHISM_BLDDIR?=$(SCHISM_SRCDIR)/build
+SCHISM_BINDIR?=$(ROOTDIR)/SCHISM_INSTALL
+
+# Make sure the expected directories exist and are non-empty:
+$(call require_dir,$(SCHISM_SRCDIR),SCHISM source directory)
+
+# ENV for SCHISM - exchange with NEMS ENV
+comp_option=intel                       
+
+SCHISM_ALL_OPTS= \
+  COMP_SRCDIR="$(SCHISM_SRCDIR)" \
+  COMP_BINDIR="$(SCHISM_BINDIR)" \
+  MACHINE_ID="$(MACHINE_ID)"
+
+########################################################################
+
+# Rule for building this component:
+
+build_SCHISM: $(schism_mk)
+
+
+$(schism_mk): configure $(CONFDIR)/configure.nems
+	+$(MODULE_LOGIC); echo $(SCHISM_SRCDIR)/src; exec cmake -S$(SCHISM_SRCDIR)/src -B$(SCHISM_SRCDIR)/build
+#	+$(MODULE_LOGIC); echo $(SCHISM_SRCDIR)/src; cd $(SCHISM_SRCDIR); exec cmake -S$(SCHISM_SRCDIR) -B$(SCHISM_SRCDIR)/build; cd $(SCHISM_BLDDIR); exec $(MAKE) install
+	+$(MODULE_LOGIC); cd $(SCHISM_SRCDIR)/../schism-esmf/src/schism; exec $(MAKE) $(SCHISM_ALL_OPTS) nuopcinstall \
+          DESTDIR=/ "INSTDIR=$(SCHISM_BINDIR)"
+	@echo ""
+	test -d "$(SCHISM_BINDIR)"
+	@echo ""
+	test -s $(schism_mk)
+	@echo ""
+
+########################################################################
+
+# Rule for cleaning the SRCDIR and BINDIR:
+
+clean_SCHISM:
+#	+cd $(SCHISM_SRCDIR); exec $(MAKE) -f build/Makefile -k clean
+#	@echo ""
+
+distclean_SCHISM: clean_SCHISM
+	+cd $(SCHISM_SRCDIR)/work ; exec $(MAKE) -k distclean
+	rm -rf $(SCHISM_BINDIR)
+	@echo ""
+
+distclean_NUOPC:
+	+cd $(SCHISM_SRCDIR)/../schism-esmf/src/schism ; exec rm -f *.o *.mod *.a schism.mk  # make clean/distclean here
+	rm -rf $(SCHISM_BINDIR)
+	@echo ""
