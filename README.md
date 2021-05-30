@@ -3,11 +3,20 @@
 ```bash
 ./build.sh --component "SCHISM" --compiler intel --clean -2
 ```
+
 OR,
 
 ```bash
 ./build.sh --component "SCHISM" --plat orion --compiler intel --clean -2
 ```
+
+OR,
+
+```bash
+./build.sh --help
+```
+to see all available options.
+
 Panagiotis Velissariou - 05/29/2021
 
 # ADC-WW3-NWM-NEMS
