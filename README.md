@@ -3,15 +3,11 @@
 ```bash
 ./build.sh --component "SCHISM" --compiler intel --clean -2
 ```
-
 OR,
-
 ```bash
 ./build.sh --component "SCHISM" --plat orion --compiler intel --clean -2
 ```
-
 OR,
-
 ```bash
 ./build.sh --help
 ```
