@@ -35,7 +35,7 @@ build_SCHISM: $(schism_mk)
 
 $(schism_mk): configure $(CONFDIR)/configure.nems
    ### Configure CMake build for SCHISM
-	+$(MODULE_LOGIC); echo "SCHISM_SRCDIR = $(SCHISM_SRCDIR)"; exec cmake -S $(SCHISM_SRCDIR) -B $(SCHISM_ROOTDIR)/build
+	+$(MODULE_LOGIC); echo "SCHISM_SRCDIR = $(SCHISM_SRCDIR)"; exec cmake -S $(SCHISM_SRCDIR) -B $(SCHISM_ROOTDIR)/build -DCMAKE_VERBOSE_MAKEFILE=TRUE
    ### Compile the SCHISM components
 	+cd $(SCHISM_BLDDIR); exec $(MAKE) pschism
 #	cd $(SCHISM_BLDDIR); exec $(MAKE) install

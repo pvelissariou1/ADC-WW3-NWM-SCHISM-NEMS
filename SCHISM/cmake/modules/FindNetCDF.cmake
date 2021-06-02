@@ -177,7 +177,7 @@ set(_CXX_libs_flag --libs)
 set(_C_includes_flag --includedir)
 # PV: The following workaround is for a GNU/gfortran setup
 #set(_Fortran_includes_flag --includedir)
-set(_Fortran_includes_flag "--fflags --includedir")
+set(_Fortran_includes_flag "--fflags")
 set(_CXX_includes_flag --includedir)
 # PV: modified to include in the list the CFLAG/FFLAG/LDFLAG defined directories
 function(netcdf_config exec flag output_var)
