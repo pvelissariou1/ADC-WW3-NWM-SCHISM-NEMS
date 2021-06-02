@@ -39,13 +39,14 @@ $(schism_mk): configure $(CONFDIR)/configure.nems
    ### Compile the SCHISM components
 	+cd $(SCHISM_BLDDIR); exec $(MAKE) pschism
 #	cd $(SCHISM_BLDDIR); exec $(MAKE) install
-#	+$(MODULE_LOGIC); cd $(SCHISM_SRCDIR)/../schism-esmf/src/schism; exec $(MAKE) $(SCHISM_ALL_OPTS) nuopcinstall \
-#          DESTDIR=/ "INSTDIR=$(SCHISM_BINDIR)"
-#	@echo ""
-#	test -d "$(SCHISM_BINDIR)"
-#	@echo ""
-#	test -s $(schism_mk)
-#	@echo ""
+	make -C  $(SCHISM_ROOTDIR)/../schism-esmf install-nuopc DESTDIR=$(SCHISM_BINDIR) SCHISM_BUILD_DIR=$(SCHISM_ROOTDIR)/build
+	#+$(MODULE_LOGIC); cd $(SCHISM_SRCDIR)/../schism-esmf/src/schism; exec $(MAKE) $(SCHISM_ALL_OPTS) install-nuopc  \
+        #  DESTDIR=/ "INSTDIR=$(SCHISM_BINDIR)"
+	@echo ""
+	test -d "$(SCHISM_BINDIR)"
+	@echo ""
+	test -s $(schism_mk)
+	@echo ""
 
 ########################################################################
 
